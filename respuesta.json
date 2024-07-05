@@ -1,0 +1,39 @@
+{
+    "object": "whatsapp_business_account",
+    "entry": [
+        {
+            "id": "309896262214523",
+            "changes": [
+                {
+                    "value": {
+                        "messaging_product": "whatsapp",
+                        "metadata": {
+                            "display_phone_number": "15550268629",
+                            "phone_number_id": "344148525441423"
+                        },
+                        "contacts": [
+                            {
+                                "profile": {
+                                    "name": "Andres Silva Basauri"
+                                },
+                                "wa_id": "51956672465"
+                            }
+                        ],
+                        "messages": [
+                            {
+                                "from": "51956672465",
+                                "id": "wamid.HBgLNTE5NTY2NzI0NjUVAgASGBQzQUNFRjMwRDE4QjY3QUQ0QzE1MQA=",
+                                "timestamp": "1718588064",
+                                "text": {
+                                    "body": "Hola"
+                                },
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    "field": "messages"
+                }
+            ]
+        }
+    ]
+}
