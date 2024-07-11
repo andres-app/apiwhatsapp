@@ -18,37 +18,64 @@
         }
     }
 
-    function recibirMensajes($req, $res) {
-        
-        try {
-            
+    function recibirMensajes($req,$res){
+        try{
             $entry = $req['entry'][0];
             $changes = $entry['changes'][0];
             $value = $changes['value'];
-            $mensaje = $value['messages'][0];
-            
-            $comentario = $mensaje['text']['body'];
-            $numero = $mensaje['from'];
-            
-            $id = $mensaje['id'];
-            
-            $archivo = "log.txt";
-            
-            if (!verificarTextoEnArchivo($id, $archivo)) {
-                $archivo = fopen($archivo, "a");
-                $texto = json_encode($id).",".$numero.",".$comentario;
-                fwrite($archivo, $texto);
-                fclose($archivo);
-                
-                EnviarMensajeWhastapp($comentario,$numero);
-            }
-    
-            $res->header('Content-Type: application/json');
-            $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
+            $objetomensaje = $value['messages'];
 
-        } catch (Exception $e) {
-            $res->header('Content-Type: application/json');
-            $res->status(200)->send(json_encode(['message' => 'EVENT_RECEIVED']));
+            if ($objetomensaje){
+                $messages  = $objetomensaje[0];
+
+                if(array_key_exists("type",$messages)){
+                    $tipo = $messages["type"];
+
+                    if($tipo == "interactive"){
+                        $tipo_interactivo = $messages["interactive"]["type"];
+
+                        if($tipo_interactivo == "button_reply"){
+
+                            $comentario = $messages["interactive"]["button_reply"]["id"];
+                            $numero = $messages['from'];
+
+                            EnviarMensajeWhastapp($comentario,$numero);
+
+                            $registro = new Registro();
+                            $registro->insert_registro($numero,$comentario);
+
+                        }else if($tipo_interactivo == "list_reply"){
+
+                            $comentario = $messages["interactive"]["list_reply"]["id"];
+                            $numero = $messages['from'];
+
+                            EnviarMensajeWhastapp($comentario,$numero);
+
+                            $registro = new Registro();
+                            $registro->insert_registro($numero,$comentario);
+
+                        }
+
+                    }
+
+                    if (array_key_exists("text",$messages)){
+                        $comentario = $messages['text']['body'];
+                        $numero = $messages['from'];
+
+                        EnviarMensajeWhastapp($comentario,$numero);
+
+                        $registro = new Registro();
+                        $registro->insert_registro($numero,$comentario);
+                    }
+
+                }
+            }
+
+            echo json_encode(['message' => 'EVENT_RECEIVED']);
+            exit;
+        }catch(Exception $e){
+            echo json_encode(['message' => 'EVENT_RECEIVED']);
+            exit;
         }
     }
     
