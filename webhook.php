@@ -165,6 +165,262 @@
                 )
             ]);
         }else if (strpos($comentario,'gchatgpt:')!== false){
+        }else if (strpos($comentario,'boton') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "recipient_type" => "individual",
+                "to" => $numero,
+                "type" => "interactive",
+                "interactive" => [
+                    "type" => "button",
+                    "body" => [
+                        "text" => "¿Confirmas tu registro?"
+                    ],
+                    "footer" => [
+                        "text" => "Selecciona una de las opciones"
+                    ],
+                    "action" => [
+                        "buttons" => [
+                            [
+                                "type" => "reply",
+                                "reply" => [
+                                    "id" => "btnsi",
+                                    "title" => "Si"
+                                ]
+                            ],[
+                                "type" => "reply",
+                                "reply" => [
+                                    "id" => "btnno",
+                                    "title" => "No"
+                                ]
+                            ],[
+                                "type" => "reply",
+                                "reply" => [
+                                    "id" => "btntalvez",
+                                    "title" => "Tal Vez"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+        }else if (strpos($comentario,'btnsi') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Muchas gracias por Aceptar."
+                ]
+            ]);
+        }else if (strpos($comentario,'btnno') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Es una lastima."
+                ]
+            ]);
+        }else if (strpos($comentario,'btntalvez') !== false){
+        }else if (strpos($comentario,'lista') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "to" => $numero,
+                "type" => "interactive",
+                "interactive" => [
+                    "type" => "list",
+                    "body" => [
+                        "text" => "Seleccionar alguna opcion"
+                    ],
+                    "footer" => [
+                        "text" => "Seleciona una de las opciones para poder ayudarte"
+                    ],
+                    "action" => [
+                        "button" => "Ver Opciones",
+                        "sections" => [
+                            [
+                                "title" => "Compra y Venta",
+                                "rows" => [
+                                    [
+                                    "id" => "btncompra",
+                                    "title" => "Comprar",
+                                    "description" => "Compra los mejores articulos de tecnologia"
+                                    ],[
+                                        "id" => "btnvender",
+                                        "title" => "Vender",
+                                        "description" => "Vende lo que ya no estes usando"
+                                    ]
+                                ]
+                            ],[
+                                "title" => "Distribución y entrega",
+                                "rows" => [
+                                    [
+                                        "id" => "btndireccion",
+                                        "title" => "Local",
+                                        "description" => "Puedes Visitar nuestro local"
+                                    ],[
+                                        "id" => "btnentrega",
+                                        "title" => "Entrega",
+                                        "description" => "La entrega se realiza todos los dias"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+        }else if (strpos($comentario,'btncompra') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Muchas gracias por Comprar."
+                ]
+            ]);
+        }else if (strpos($comentario,'btnvender') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Muchas gracias por Vender."
+                ]
+            ]);
+        }else if (strpos($comentario,'btndireccion') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "La direccion esta en su factura."
+                ]
+            ]);
+        }else if (strpos($comentario,'btnentrega') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "La entrega se realizara durante el dia."
+                ]
+            ]);
+        }else if (strpos($comentario,'dni:')!== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Estare a la espera."
+                ]
+            ]);
+        }else if (strpos($comentario,'lista') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",
+                "to" => $numero,
+                "type" => "interactive",
+                "interactive" => [
+                    "type" => "list",
+                    "body" => [
+                        "text" => "Seleccionar alguna opcion"
+                    ],
+                    "footer" => [
+                        "text" => "Seleciona una de las opciones para poder ayudarte"
+                    ],
+                    "action" => [
+                        "button" => "Ver Opciones",
+                        "sections" => [
+                            [
+                                "title" => "Compra y Venta",
+                                "rows" => [
+                                    [
+                                    "id" => "btncompra",
+                                    "title" => "Comprar",
+                                    "description" => "Compra los mejores articulos de tecnologia"
+                                    ],[
+                                        "id" => "btnvender",
+                                        "title" => "Vender",
+                                        "description" => "Vende lo que ya no estes usando"
+                                    ]
+                                ]
+                            ],[
+                                "title" => "Distribución y entrega",
+                                "rows" => [
+                                    [
+                                        "id" => "btndireccion",
+                                        "title" => "Local",
+                                        "description" => "Puedes Visitar nuestro local"
+                                    ],[
+                                        "id" => "btnentrega",
+                                        "title" => "Entrega",
+                                        "description" => "La entrega se realiza todos los dias"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+        }else if (strpos($comentario,'btncompra') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Muchas gracias por Comprar."
+                ]
+            ]);
+        }else if (strpos($comentario,'btnvender') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "Muchas gracias por Vender."
+                ]
+            ]);
+        }else if (strpos($comentario,'btndireccion') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "La direccion esta en su factura."
+                ]
+            ]);
+        }else if (strpos($comentario,'btnentrega') !== false){
+            $data = json_encode([
+                "messaging_product" => "whatsapp",    
+                "recipient_type"=> "individual",
+                "to" => $numero,
+                "type" => "text",
+                "text"=> [
+                    "preview_url" => false,
+                    "body"=> "La entrega se realizara durante el dia."
+                ]
+            ]);
+        }else if (strpos($comentario,'dni:')!== false){
             $texto_sin_gchatgpt = str_replace("gchatgpt: ", "", $comentario);
 
             //$apiKey = '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';
@@ -232,17 +488,6 @@
         }
     }
     
-    function verificarTextoEnArchivo($texto, $archivo) {
-        $contenido = file_get_contents($archivo);
-        
-        if (strpos($contenido, $texto) !== false) {
-            return true; // El texto ya existe en el archivo
-        } else {
-            return false; // El texto no existe en el archivo
-        }
-    }
-    
-
     if ($_SERVER['REQUEST_METHOD']==='POST'){
         $input = file_get_contents('php://input');
         $data = json_decode($input,true);
